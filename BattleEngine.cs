@@ -1,16 +1,19 @@
 public class BattleEngine
 {
-    private BattleStoryTeller BattleStoryTeller = new()
+    private BattleStoryTeller BattleStoryTeller = new();
 
     public void Turno(Personagem p1, Personagem p2)
     {
         var contadorTurno = 1;
         do{
+            Console.WriteLine("Pressione 'Enter' para rodar o dado...");
+            Console.ReadKey();
+
             Thread.Sleep(900);
             Ataque(p1, p2);
             if (p2.Vida <= 0)
             {
-                BattleStoryTeller.Speak($"{p2.Nome} morreu!")
+                BattleStoryTeller.Speak($"{p2.Nome} morreu!");
                 return;
             }
 
@@ -18,16 +21,14 @@ public class BattleEngine
             Ataque(p2, p1);
             if (p1.Vida <= 0)
             {
-                BattleStoryTeller.Speack($"{p1.Nome} morreu!")
+                BattleStoryTeller.Speak($"{p1.Nome} morreu!");
                 return;
             }
             
             BattleStoryTeller.Speak($"O turno {contadorTurno} acabou!");
             contadorTurno++;
             Thread.Sleep(500);
-            Console.WriteLine("Pressione 'Enter' para rodar o dado...");
-            Console.ReadKey();
-
+          
         } while (p1.Vida > 0 && p2.Vida > 0 );
     }
     public void Ataque(Personagem atacante, Personagem oponente)
